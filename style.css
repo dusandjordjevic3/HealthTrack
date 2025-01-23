@@ -1,0 +1,610 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-image: url('fitness.jpg'); /* Putanja do slike */
+    background-size: cover;   /* Slika se prilagođava širini i visini ekrana */
+    background-position: center center;  /* Slika će biti centrirana */
+    background-attachment: fixed; /* Slika ostaje fiksirana dok se stranica pomera */
+    background-repeat: no-repeat; /* Slika se neće ponavljati */
+    min-height: 100vh;  /* Osigurava da pokriva celu visinu ekrana */
+    color: #fff; /* Postavljanje boje teksta na belo, da bi bio čitljiv na tamnoj pozadini */
+}
+
+/* Heder */
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px 0;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* Navbar */
+.navbar {
+    margin-bottom: 30px;
+}
+
+.navbar-nav {
+    display: flex; /* Postavlja nav stavke u fleksibilni kontejner */
+    justify-content: center; /* Centriranje elemenata horizontalno */
+    width: 100%; /* Da zauzme celu širinu kontejnera */
+}
+
+.navbar-nav .nav-item {
+    margin: 0 15px;
+}
+
+.navbar-nav .nav-link {
+    color: #333 !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff !important;
+}
+
+.search-icon{
+    width:25px;
+    height: auto;
+}
+
+#HealthTrack{
+    color:black;
+    font-weight: bold;
+}
+
+/* Osnovni stil za navigaciju */
+#navbarNav {
+    display: flex; /* Ovo će prikazivati meni horizontalno */
+}
+
+/* Prikazivanje hamburger menija samo na mobilnim uređajima */
+#hamburgerMenu {
+    display: none; /* Hamburger meni je skriven na većim ekranima */
+}
+
+/* Sekcije */
+section {
+    padding: 40px 0;
+    margin: 0 15px;
+}
+
+/* Poglavlja */
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: left;
+}
+
+#izaberitepol{
+    color:black;
+}
+
+#preporuceniparametri {
+    color: black;
+}
+
+/* Glavni kontenti */
+.lead {
+    font-weight: bold;
+    font-size: 1.0rem;
+    color: #292929;
+}
+
+/* Forme */
+form {
+    width: 100%; /* Širina forme */
+    max-width: 800px; /* Ograničava maksimalnu širinu forme */
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto 20px; /* Centriranje forme */
+}
+
+form .form-label {
+    font-weight: bold;
+    color: #333;
+}
+
+form input,
+form textarea {
+    width: 60%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    margin: 0 auto;
+}
+
+form input:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+form button {
+    background-color: #007bff;
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #004085;
+}
+
+/* Analize (Chart.js kontenjeri) */
+#analysis canvas {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Preporuke */
+#recommendationSteps {
+    max-width: 600px;  /* Ograničava maksimalnu širinu */
+    margin: 0 auto;    /* Centriranje sadržaja */
+    padding: 15px;     /* Unutrašnji razmak za bolji izgled */
+    background-color: #005ddedf; /* Pozadinska boja */
+    border-radius: 16px;  /* Zaobljene ivice */
+    text-align: center;  /* Centriranje teksta */
+    font-weight: bold; /* Debljina teksta */
+}
+
+#recommendationCalories {
+    max-width: 600px;  
+    margin: 0 auto;    
+    padding: 15px;     
+    background-color: #f95c40df; 
+    border-radius: 16px;  
+    text-align: center;  
+    font-weight: bold; 
+}
+
+#recommendationWater {
+    max-width: 600px;  
+    margin: 0 auto;    
+    padding: 15px;     
+    background-color: #2b95f9df; 
+    border-radius: 16px;  
+    text-align: center;  
+    font-weight: bold; 
+}
+
+#recommendationSleep {
+    max-width: 600px;  
+    margin: 0 auto;    
+    padding: 15px;     
+    background-color: #188930df; 
+    border-radius: 16px;  
+    text-align: center;  
+    font-weight: bold; 
+}
+
+.radio-button-section {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.radio-button-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+/* Flexbox za radio dugmadi */
+.radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 0px;
+    flex-direction: column;
+}
+
+/* Kontenjer za radio dugme */
+.radio-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-bottom: 0px;
+}
+
+/* Sakrivanje podrazumevanog radio dugmeta */
+.radio-container input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+/* Custom radio dugme */
+.checkmark {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 18px;
+    width: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.radio-container input[type="radio"]:checked + .checkmark {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.checkmark::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.radio-container:hover .checkmark {
+    border-color: #007bff;
+}
+
+/* Stil za label (Muškarca ili ženu) */
+.radio-container label {
+    color: black;      /* stavlja crni tekst */
+    font-weight: bold; /* stavlja podebljani tekst */
+    margin-left: 8px;   /* pravi prostor između teksta i labela */
+}
+
+/* Stilizacija kontenjera za kalorijski rezultat */
+#calorieResult {
+    background-color: #f8f9fa;  /* svetla boja pozadine */
+    padding: 20px;  /* padding */
+    border-radius: 8px;  /* zaobljene ivice */
+    border: 1px solid #ddd;  /* okvir sekcije */
+    margin-bottom: 15px;  /* prostor ispod rezultata */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* senka za vizuelni prikaz dubine */
+    text-align: center;  /* centriranje teksta */
+    width: 100%;  /* širina */
+    max-width: 800px;  /* maksimalna širina boxa */
+    margin: 0 auto;  /* centriraj box horizontalno */
+}
+
+/* Futer */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+    color: #777;
+    border-top: 1px solid #ddd;
+}
+
+footer p {
+    font-size: 1rem;
+}
+
+/* Stilizacija dugmeta za povratak na vrh stranice */
+#goToTopButton {
+    display: none; /* Sakriven u početku */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#goToTopButton:hover {
+    background-color: #0056b3;  /* Zatamnjivanje prilikom stavljanja miša preko dugmeta */
+}
+
+.icon {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+#modeIcon {
+    width: 30px;
+    height: 30px;
+}
+
+
+/* Stilizacija za tamni režim */
+body.dark-mode {
+    background-image: url('fitnessdark.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    min-height: 100vh;  
+    color: #fff;
+}
+
+body.dark-mode header, body.dark-mode footer {
+    background-color: #1e1e1e; /* tamna pozadina za heder i futer */
+}
+
+body.dark-mode #HealthTrack{
+    color: white;
+    font-weight: bold;
+}
+
+body.dark-mode #modeIcon {
+    width: 30px;
+    height: 30px;
+    background-color:grey;
+    color:white;
+}
+
+body.dark-mode button {
+    background-color: #444444; /* Tamna pozadina dugmeta */
+    color: #ffffff; /* Svetla boja */
+}
+
+body.dark-mode form{
+    background-color: rgb(187, 187, 187);;
+}
+
+body.dark-mode input, body.dark-mode select, body.dark-mode textarea {
+    background-color: #333333; /* tamna pozadina za form elemente */
+    color: #ffffff; /* svetla boja teksta */
+    border: 1px solid #555555; 
+}
+
+body.dark-mode input::placeholder, body.dark-mode select::placeholder, body.dark-mode textarea::placeholder {
+    color: #aaa; /* Boja placeholdera koji stoje u poljima u tamnom režimu */
+}
+
+/* Stilizacija hedinga i teksta u tamnom režimu */
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode h5, body.dark-mode h6 {
+    color: #ffffff; /* Svetli hedinzi */
+}
+
+body.dark-mode a {
+    color: #00bcd4; /* Boja linka */
+}
+
+/* Promena boje paragrafa dok je u tamnom režimu */
+body.dark-mode p {
+    color: #ffffff; /* Beli tekst za paragrafe */
+}
+
+body.dark-mode #darkModeToggle {
+    background-color: #333333; 
+    color: #ffffff; 
+}
+
+body.dark-mode #preporuceniparametri {
+    color: white;  /* Promena boje u belu dok je u tamnom režimu */
+}
+
+body.dark-mode #izaberitepol{
+    color:black;
+}
+
+body.dark-mode .navbar.navbar {
+    margin-bottom: 30px;
+    background-color: #a3a3a3 !important;
+}
+
+body.dark-mode .navbar-nav {
+    display: flex; 
+    justify-content: center; 
+    width: 100%; 
+}
+
+body.dark-mode .navbar-nav .nav-item {
+    margin: 0 15px;
+}
+
+body.dark-mode .navbar-nav .nav-link {
+    color: #f0f0f0 !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+}
+
+body.dark-mode .navbar-nav .nav-link:hover {
+    color: #000000 !important;
+}
+/* futer je sive boje dok je u tamnom režimu */
+body.dark-mode footer {
+    background-color: #444444 !important; 
+    color: white;
+    border-top: 1px solid #555555;
+}
+
+body.dark-mode footer p {
+    font-size: 1rem;
+}
+
+/* Responzivni dizajn za manje ekrane i mobilne telefone */
+@media (max-width: 768px) {
+    /* Heder */
+    header h1 {
+        font-size: 2rem; /* Manji font na tabletima */
+    }
+
+    /* Navbar */
+    .navbar-nav {
+        display: flex;
+        justify-content: center; /* Centriraj sve elemente (uključujući search ikonu) */
+        text-align: center; /* Poravnanje navigacije u centar */
+        margin-top: 10px;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px; /* Prostor između stavki */
+    }
+
+    #navbarNav {
+        display: none; /* Meni je skriven na mobilnim uređajima */
+        flex-direction: column; /* Meni se vertikalno prikazuje */
+    }
+
+    #navbarNav.show {
+        display: block; /* Meni se prikazuje kada je dodana 'show' klasa */
+    }
+
+    #hamburgerMenu {
+        display: block; /* Hamburger meni se prikazuje samo na mobilnim uređajima */
+    }
+
+    #searchIcon {
+        margin: 0 auto; /* Centriranje search ikone */
+        font-size: 25px;
+    }
+
+    /* Sadržaj */
+    .container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    /* Sekcija h2 */
+    h2 {
+        font-size: 1.7rem; /* Manji naslov */
+    }
+
+    /* Forma */
+    form {
+        margin-top: 15px;
+        padding: 20px; /* Smanji padding za manje ekrane */
+    }
+
+    form input, form textarea {
+        width: 100%; /* Polja zauzimaju celu širinu */
+    }
+
+    form button {
+        width: 100%; /* Dugme za unos zauzima celu širinu */
+    }
+
+    /* Preporuke */
+    #recommendationSteps, #recommendationCalories, #recommendationWater, #recommendationSleep {
+        max-width: 100%; /* Širina 100% */
+        padding: 10px;
+    }
+
+    .radio-button-section {
+        width: 100%; /* Forme sa radio dugmadi će zauzimati celu širinu */
+        padding: 10px;
+    }
+
+    /* Kontenjer za kalorijski rezultat */
+    #calorieResult {
+        width: 100%; /* Kontenjer kalorijskog rezultata zauzima celu širinu */
+        font-size: 1rem; /* Manji font za mobilne ekrane */
+    }
+
+    /* Analiza (Chart.js) */
+    #analysis canvas {
+        width: 100%; /* Grafikon će biti širine 100% */
+    }
+
+    /* Footer */
+    footer {
+        padding: 15px 0; /* Manji padding u futeru */
+    }
+
+    footer p {
+        font-size: 0.9rem; /* Manji font u futeru */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Skaliranje za male ekrane */
+    header h1 {
+        font-size: 1.5rem; /* Još manji font */
+    }
+
+    /* Navbar */
+    .navbar-nav .nav-link {
+        font-size: 1rem; /* Manji font za navigacijske linkove */
+    }
+
+    form input, form textarea {
+        width: 100%; /* Forme zauzimaju celu širinu */
+        padding: 10px; /* Manje paddinga */
+    }
+
+    form button {
+        font-size: 1rem; /* Manji font na dugmetima */
+        padding: 10px; /* Manje paddinga za dugme */
+    }
+
+    .lead {
+        font-size: 0.9rem; /* Manji tekst za mobilne ekrane */
+    }
+
+    section {
+        padding: 15px 10px; /* Manji padding za sekcije */
+    }
+
+    .radio-button-section h2 {
+        font-size: 1.1rem; /* Manji font za h2 */
+    }
+
+
+    /* Preporuke */
+    #recommendationSteps, #recommendationCalories, #recommendationWater, #recommendationSleep {
+        font-size: 0.9rem; /* Manji font u preporukama */
+        padding: 12px;
+    }
+
+    #calorieResult {
+        font-size: 1rem; /* Manji font za rezultat kalorija */
+        margin-top: 15px; /* Veći razmak između rezultata */
+    }
+
+    /* Dugme za povratak na vrh stranice */
+    #goToTopButton {
+        font-size: 14px; /* Manji font na mobilnim uređajima */
+        padding: 8px 16px; /* Manje paddinga za dugme */
+    }
+
+    .icon {
+        font-size: 18px; /* Manja ikonica */
+    }
+}
+
+#analysis canvas {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#calorieResult {
+    color: #007bff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+}
