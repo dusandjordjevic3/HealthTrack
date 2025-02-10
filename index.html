@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthTrack - Praćenje zdravlja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="search.png" type="image/png"> <!--ikonica koja se prikazuje na browser tabu-->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-4">
+        <h1>HealthTrack - Sistem za praćenje zdravlja i fizičke aktivnosti</h1> <!-- naslov -->
+    </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <!-- Hamburger meni ikona -->
+    <button id="hamburgerMenu" aria-label="Open navigation menu">
+        <span>☰</span> <!-- Može biti i ikona ili slika -->
+    </button>
+            <a class="navbar-icon"><img src="search.png" class="search-icon"></a><!--ikonica u navbaru-->
+            <span id="HealthTrack">HealthTrack</span> <!-- navbar -->
+            <div class="collapse navbar-collapse" id="navbarNav"> <!-- u navbaru klikom na bilo kom linku, vodi korisnika do određene sekcije web-sajta-->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#daily-entry">Dnevni unos</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="#analysis">Analiza podataka</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recommendations">Preporuke</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#calculator">Kalkulator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li> 
+                </ul>
+                <button id="darkModeToggle"><img id="modeIcon" src="night-mode.png" alt="Mode Icon"></button> <!--dugme za tamni režim-->
+            </div>
+        </div>
+    </nav>
+    <section class="container py-5">
+        <h2 class="text-center">Zdrav način života</h2> <!--naslov i uvodni tekst web-sajt, kratki opis čemu sajt sluzi-->
+        <p class="lead text-center" font-family="Tahoma">
+            <strong>HealthTrack</strong> vam pomaže da pratite svoje zdravlje, fizičku aktivnost, unos kalorija i spavanje. Povedite računa o svom zdravlju uz naše personalizovane preporuke!<br>
+            Zdravlje je najvredniji kapital, a pravilna ishrana i fizička aktivnost temelj su svakog zdravog života.
+             Na našem sajtu ćete pronaći sve što vam je potrebno kako biste unapredili svoje navike i postigli željene rezultate.
+              Bilo da želite da se oslobodite suvišnih kilograma, poboljšate fizičku izdržljivost,
+               ili jednostavno živite zdravije, ovde ste na pravom mestu.
+        </p>
+    </section>
+    <section id="daily-entry" class="container py-5">
+        <h2 class="text-center">Dnevni unos podataka</h2> <!-- sekcija za dnevni unos podataka-->
+        <form id="healthForm">
+            <!-- Izbor dana -->
+        <div class="mb-3">
+            <label for="daySelect" class="form-label">Izaberite dan</label>
+            <select id="daySelect" class="form-control">
+                <option value="0">Ponedeljak</option>
+                <option value="1">Utorak</option>
+                <option value="2">Sreda</option>
+                <option value="3">Četvrtak</option>
+                <option value="4">Petak</option>
+                <option value="5">Subota</option>
+                <option value="6">Nedelja</option>
+            </select>
+        </div>
+            <div class="mb-3">
+                <label for="steps" class="form-label">Pređeni koraci</label> <!-- polje za pređene korake-->
+                <input type="number" class="form-control" id="steps" min="0" placeholder="Unesite broj Vaših koraka..." required>
+            </div>
+            <div class="mb-3">
+                <label for="calories" class="form-label">Unos kalorija</label> <!-- polje za unos kalorija-->
+                <input type="number" class="form-control" id="calories" min="0" placeholder="Unesite broj kalorija..." required>
+            </div>
+            <div class="mb-3">
+                <label for="water" class="form-label">Unos vode (u litrama)</label> <!-- polje za unos vode-->
+                <input type="number" step="0.1" class="form-control" id="water" min="0" placeholder="Unesite broj litara vode..." required>
+            </div>
+            <div class="mb-3">
+                <label for="sleep" class="form-label">Trajanje sna (u satima)</label> <!-- polje za trajanje sna-->
+                <input type="number" class="form-control" id="sleep" min="0" placeholder="Koliko sati ste spavali...?" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Unesi podatke</button> <!--dugme za unos podataka, kada se stisne, grafikon
+            ispod se dinamički menja -->
+        </form>
+        <center>
+        <p id="preporuceniparametri"><b>Preporučeni parametri za odraslu osobu: <br> <!--parametri koji su predodređeni za zdravu odraslu osobu-->
+            <span style="color: #005ddedf;">1.Najmanje 5000 pređenih koraka dnevno</span><br>
+            <span style="color: rgb(220, 49, 49);">2.Između 1500-2500 kalorija dnevno</span><br>
+            <span style="color: rgb(53, 148, 215);">3.Uneti makar 2 litra vode dnevno</span><br>
+            <span style="color: green;">4.Barem 8 sati neprekidnog sna</span>
+        </b></p>
+        </center>
+    </section>
+    <section id="analysis" class="container py-5">
+    <h2 class="text-center">Analiza podataka</h2> <!-- Grafikon za analizu podataka -->
+    <canvas id="healthChart" width="400" height="200"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+    <script>
+        // Kreiramo linijski grafikon
+var ctx = document.getElementById('healthChart').getContext('2d');
+var healthChart = new Chart(ctx, {
+    type: 'bar', // Tip grafikona
+    data: {
+        labels: ['Pon', 'Uto', 'Sre', 'Čet', 'Pet', 'Sub', 'Ned'], // Dani u nedelji
+        datasets: [{
+            label: 'Pređeni koraci',
+            data: [0, 0, 0, 0, 0, 0, 0], // Početne vrednosti u grafikonu (svi dani su inicijalno 0)
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 7,
+            tension: 0.1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                min: 0,
+                max: 15000, 
+                ticks: {
+                    stepSize: 1000
+                }
+            },
+            x: {
+                ticks: {
+                    font: {
+                        size: 16,
+                        weight: 'bold',
+                    }
+                }
+            }
+        },
+        plugins: {
+            annotation: {
+                annotations: {
+                    line: {
+                        type: 'line',
+                        yMin: 5000,  // Visina linije (5000 koraka)
+                        yMax: 5000,  // Visina linije (5000 koraka)
+                        borderColor: 'orange',  // Boja linije
+                        borderWidth: 2,  // Debljina linije
+                        label: {
+                            content: 'Recommended Steps',  // Tekst uz liniju
+                            enabled: true,
+                            position: 'start',
+                            backgroundColor: 'orange',
+                            color: 'white',
+                            font: {
+                                size: 12
+                            },
+                            xAdjust: 10  // Pomak teksta u odnosu na liniju
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Event listener za unos podataka
+document.getElementById('healthForm').addEventListener('submit', function(e) {
+    e.preventDefault();  // Sprečava osvežavanje stranice pri submitu forme
+
+    // Dobijamo podatke unete u formi
+    const selectedDay = parseInt(document.getElementById('daySelect').value);  // Odabrani dan kao broj (0-6)
+    const steps = parseInt(document.getElementById('steps').value);  // Broj koraka unet od strane korisnika
+
+    // Debugging: Proveri koje vrednosti koristiš
+    console.log("Izabrani dan (indeks): " + selectedDay);  // Indeks dana koji je izabran
+    console.log("Broj koraka: " + steps); // Broj koraka koji je unet
+
+    // Proveravamo da li je unesena validna vrednost za korake
+    if (!isNaN(steps) && steps >= 0) {
+        // Debugging: Proveri sve vrednosti u 'data' pre ažuriranja
+        console.log("Podaci pre ažuriranja: ", healthChart.data.datasets[0].data);
+
+        // Ažuriraj samo odabrani dan u grafikonu
+        healthChart.data.datasets[0].data[selectedDay] = steps;
+
+        // Debugging: Proveri vrednosti koje se ažuriraju
+        console.log("Podaci nakon ažuriranja: ", healthChart.data.datasets[0].data);
+
+        // Ažuriraj grafikon
+        healthChart.update();
+
+        // Debugging: Provera da li je grafikon zaista ažuriran
+        console.log("Ažuriranje grafikona...");
+    } else {
+        alert('Molimo unesite validan broj koraka.');
+    }
+});
+    </script>
+
+
+</section>
+        </script>
+    </section>
+    <section id="recommendations" class="container py-5">
+        <h2 class="text-center">Personalizovane preporuke</h2>
+        <div id="recommendationSteps" class="text-center">
+            <!-- Preporuke za korake će biti prikazane ovde -->
+        </div><br>
+        <div id="recommendationCalories" class="text-center">
+            <!-- Preporuke za unete kalorije će biti prikazane ovde -->
+        </div><br>
+        <div id="recommendationWater" class="text-center">
+            <!-- Preporuke za unos vode će biti prikazane ovde -->
+        </div><br>
+        <div id="recommendationSleep" class="text-center">
+            <!-- Preporuke trajanja sna će biti prikazane ovde -->
+        </div>
+    </section>
+    <section id="calculator" class="container py-5">  <!-- kalkulator koji računa kolika je razlika između unetih i potrošenih kalorija-->
+        <h2 class="text-center">Kalkulator kalorija</h2>
+        <form id="calorieForm">
+            <div class="mb-3">
+                <label for="calorieIntake" class="form-label">Unos kalorija</label> <!--Broj dnevnih unetih kalorija-->
+                <input type="number" class="form-control" id="calorieIntake" min="0" placeholder="Unesite Vaše dnevne kalorije..." required> <!--tip unosa je broj, minimum je 0, polje se mora ispuniti-->
+            </div>
+            <div class="mb-3">
+                <label for="calorieConsumption" class="form-label">Potrošnja kalorija</label> <!--Broj dnevnih potrošenih kalorija-->
+                <input type="number" class="form-control" id="calorieConsumption" min="0" placeholder="Unesite Vaše potrošene kalorije..." required><!--tip unosa je broj, minimum je 0, polje se mora ispuniti-->
+            </div>
+            <div class="radio-button-section">
+                <h2 id="izaberitepol">Izaberite pol:</h2> <!-- radio dugme za odabir pola -->
+                <div class="radio-group">
+                    <label class="radio-container">
+                        <input type="radio" name="gender" value="male" id="male">
+                        <span class="checkmark"></span>
+                        <p style="color:black">
+                        Muškarac
+                        </p>
+                    </label>
+                    <label class="radio-container">
+                        <input type="radio" name="gender" value="female" id="female">
+                        <span class="checkmark"></span>
+                        <p style="color:black">
+                        Žena
+                        </p>
+                    </label>
+                </div>
+            </div>
+            <br>
+
+<!-- Dugme koje računa rezultat -->
+<button type="submit" class="btn btn-primary w-100" id="calculateBtn">Izračunaj</button>
+        </form>
+        <div id="calorieResultContainer" style="display:none;">
+            <div id="calorieResult" class="text-center py-3">
+            </div>
+        </div>
+        <br>
+        <p class="lead text-center" font-family="Tahoma">Preporučeni dnevni unos kalorija za odraslog muškarca je 2000-2500, a za odraslu ženu 1500-1800.</p>
+        <!--Poruka koja prikazuje preporučeni dnevni unos za muškarca i ženu-->
+    </section>
+
+<section id="contact" class="container py-5"> <!-- kontakt forma ukoliko korisnik zeli da nam posalje poruku (pohvalu, feedback, pitanja, kritike...)-->
+    <h2 class="text-center">Kontaktirajte nas</h2>
+    <form>
+        <div class="mb-3">
+            <label for="name" class="form-label">Ime</label> <!-- Ovde se unosi ime, polje je obavezno -->
+            <input type="text" class="form-control" id="name" placeholder="Unesite Vaše ime..." required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Unesite gmail..." required> <!-- Ovde se unosi gmail, polje je obavezno -->
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Poruka</label>
+            <textarea class="form-control" id="message" rows="3" placeholder="Pošaljite nam poruku, pitanje, ili preporuku za poboljšanje websajta..." required></textarea> <!-- Ovde se unosi poruka, polje je obavezno -->
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Pošaljite</button> <!-- Poruka se šalje, i nakon toga se ponovo oslobađaju polja u formi -->
+    
+    </form>
+    <!-- dugme za vraćanje na vrh stranice -->
+    <button id="goToTopButton" onclick="scrollToTop()">
+        <i class="bi bi-arrow-bar-up icon"></i>
+    </button>
+</section>
+    <footer> <!-- futer stranice -->
+        <p>&copy; 2025 HealthTrack. Sva prava zadržana.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
