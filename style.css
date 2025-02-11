@@ -46,7 +46,7 @@ header h1 {
     color: #333 !important;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .navbar-nav .nav-link:hover {
@@ -428,7 +428,7 @@ body.dark-mode .navbar-nav .nav-link {
     color: #f0f0f0 !important;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 body.dark-mode .navbar-nav .nav-link:hover {
@@ -455,13 +455,13 @@ body.dark-mode footer p {
     /* Navbar */
     .navbar-nav {
         display: flex;
-        justify-content: center; /* Centriraj sve elemente (uključujući search ikonu) */
+        justify-content: center;  /* Centriraj sve elemente (uključujući search ikonu) */
         text-align: center; /* Poravnanje navigacije u centar */
         margin-top: 10px;
     }
 
     .navbar-nav .nav-item {
-        margin-bottom: 10px; /* Prostor između stavki */
+        margin-bottom: 0px; /* Prostor između stavki */
     }
 
     #navbarNav {
@@ -478,8 +478,7 @@ body.dark-mode footer p {
     }
 
     #searchIcon {
-        margin: 0 auto; /* Centriranje search ikone */
-        font-size: 25px;
+        display: none !important;
     }
 
     /* Sadržaj */
